@@ -1,12 +1,23 @@
-import sys
+from optparse import OptionParser
 
 """
 Tip calculator app
 """
 
-meal = float(sys.argv[1])
-tax = float(sys.argv[2])
-tip = float(sys.argv[3])
+parser = OptionParser()
+
+parser.add_option("-m", "--meal", dest="meal", help="The cost of the meal")
+parser.add_option("-t", "--tax", dest="tax",
+                  help="The tax rate as a decimal value")
+parser.add_option("-p", "--tip", dest="tip",
+                  help="The tip rate as a decimal value")
+
+(options, args) = parser.parse_args()
+
+meal = float(options.meal)
+tax = float(options.tax)
+tip = float(options.tip)
+
 tax_value = meal * tax
 meal_with_tax = meal + tax_value
 tip_value = meal_with_tax * tip
