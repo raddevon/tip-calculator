@@ -2,9 +2,9 @@
 Tip calculator app
 """
 
-meal = 30.0
-tax = 0.0925
-tip = 0.15
+meal = float(raw_input('Meal cost: '))
+tax = float(raw_input('Tax rate (in decimal format): '))
+tip = float(raw_input('Tip rate (in decimal format): '))
 tax_value = meal * tax
 meal_with_tax = meal + tax_value
 tip_value = meal_with_tax * tip
