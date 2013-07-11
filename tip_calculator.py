@@ -1,10 +1,12 @@
+import sys
+
 """
 Tip calculator app
 """
 
-meal = float(raw_input('Meal cost: '))
-tax = float(raw_input('Tax rate (in decimal format): '))
-tip = float(raw_input('Tip rate (in decimal format): '))
+meal = float(sys.argv[1])
+tax = float(sys.argv[2])
+tip = float(sys.argv[3])
 tax_value = meal * tax
 meal_with_tax = meal + tax_value
 tip_value = meal_with_tax * tip
