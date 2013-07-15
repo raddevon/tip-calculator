@@ -1,30 +1,27 @@
-from optparse import OptionParser
+import argparse
 
 """
 Tip calculator app
 """
 
-parser = OptionParser()
+parser = argparse.ArgumentParser(description="Calculate your total meal cost")
 
-parser.add_option("-m", "--meal", dest="meal", help="The cost of the meal")
-parser.add_option("-t", "--tax", dest="tax",
-                  help="The tax rate as a decimal value")
-parser.add_option("-p", "--tip", dest="tip",
-                  help="The tip rate as a decimal value")
+parser.add_argument("-m", "--meal", dest="meal", type=float,
+                    help="The cost of the meal")
+parser.add_argument("-t", "--tax", dest="tax", type=float,
+                    help="The tax rate as a decimal value")
+parser.add_argument("-p", "--tip", dest="tip", type=float, default=0.15,
+                    help="The tip rate as a decimal value (default: 0.15)")
 
-(options, args) = parser.parse_args()
+args = parser.parse_args()
 
-meal = float(options.meal)
-tax = float(options.tax)
-tip = float(options.tip)
-
-tax_value = meal * tax
-meal_with_tax = meal + tax_value
-tip_value = meal_with_tax * tip
+tax_value = args.meal * args.tax
+meal_with_tax = args.meal + tax_value
+tip_value = meal_with_tax * args.tip
 total = meal_with_tax + tip_value
 
-print "The base cost of your meal was $%.2f" % meal
-print "You need to pay $%.2f for tax" % tax_value
-print "Tipping at a rate of %s%%, you should leave $%.2f for a tip." \
-    % (tax * 100, tip_value)
-print "The grand total of your meal is $%.2f" % total
+print "The base cost of your meal was ${:.2f}".format(args.meal)
+print "You need to pay ${:.2f} for tax".format(tax_value)
+print "Tipping at a rate of {:.2%}, you should leave ${:.2f} for a tip." \
+    .format(args.tax, tip_value)
+print "The grand total of your meal is ${:.2f}".format(total)
